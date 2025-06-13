@@ -6,7 +6,7 @@ from import_export.admin import ImportExportModelAdmin
 
 @admin.register(Routine)
 class RoutineAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ['day','period','semester','subject','teacher','classroom']
 
 admin.site.register(Department)
 admin.site.register(Semester)
