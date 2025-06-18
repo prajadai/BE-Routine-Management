@@ -7,8 +7,10 @@ import csv
 
 @admin.register(Routine)
 class RoutineAdmin(ImportExportModelAdmin):
-    list_display = ['day','period','semester','subject','teacher','classroom']
+    list_display = ['day','semester','section','subject','teacher','classroom','class_type']
     actions = ['export_as_timetable']
+    ordering=['day','period__start_time']
+    # list_filter = ('day','semester')
 
     def export_as_timetable(self, request, queryset):
 

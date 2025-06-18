@@ -19,7 +19,7 @@ class Semester(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.name} - {self.department}"
+        return f"{self.name}"
     
 class Subject(models.Model):
     name = models.CharField(max_length=100)
@@ -45,15 +45,14 @@ class Classroom(models.Model):
     def __str__(self):
         return f"Room {self.room_number} (Capacity:{self.capacity})"
 
-#CHOICES for days of the week
-DAY_CHOICES = [
-    ('Sunday', 'Sunday'),
-    ('Monday', 'Monday'),
-    ('Tuesday', 'Tuesday'),
-    ('Wednesday', 'Wednesday'),
-    ('Thursday','Thursday'),
-    ('Friday','Friday')
-]
+class Period(models.Model):
+    start_time=models.TimeField()
+    end_time=models.TimeField()
+    name = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.start_time}-{self.end_time})"
+
 
 #CHOICES FOR THEORY/PRACTICAL
 CLASS_CHOICES = [
@@ -68,16 +67,31 @@ SECTION_CHOICES = [
 ]
 
 class Routine(models.Model):
+    #CHOICES for days of the week
+    DAY_CHOICES = [
+        ('Sunday', 'Sunday'),
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday','Thursday'),
+        ('Friday','Friday')
+    ]
+
     day = models.CharField(max_length=10, choices=DAY_CHOICES)
-    period = models.CharField(max_length=50) #eg 10:15-11:05
+    period = models.ForeignKey(Period,on_delete=models.CASCADE) #eg 10:15-11:05
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     section = models.ForeignKey('Section', on_delete=models.CASCADE, verbose_name="Section")
     class_type = models.CharField(max_length=10, choices=CLASS_CHOICES, default="THEORY")
+    period_name = models.CharField(max_length=50, blank=True, null=True)
+    # start_time= models.TimeField()
+    # end_time=models.TimeField(null=True)
 
     class Meta:
+        # ordering = ['day','period']
+        ordering = ['day','period']
         #ensure no teahcer/classroom is double-booked
         unique_together = [
             ('day', 'period', 'teacher'),
@@ -85,4 +99,4 @@ class Routine(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.day} | {self.period} | {self.subject} [{self.class_type}] | (Room:{self.classroom.room_number})"
+        return f"{self.day} | {self.start_time}-{self.end_time} | {self.subject} [{self.class_type}] | (Room:{self.classroom.room_number})"

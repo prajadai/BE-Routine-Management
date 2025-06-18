@@ -1,3 +1,14 @@
 Day,Period,Semester,Department,Subject,Teacher,Classroom
 Sunday,10:15-11:55,4,Computer Engineering,Numerical Methods,Santosh Ghimire,308
 Sunday,11:55-1:35,4,Computer Engineering,Instrumentation,Sanjivan Satyal,308
+Monday,10:15-11:55,4,Computer Engineering,Data Communication,Nanda Bikram Adhikari,308
+Monday,11:55-1:35,4,Computer Engineering,Electromagnetics,Nischal Acharya,308
+Monday,1:35-2:25,4,Computer Engineering,Instrumentation,Sanjivan Satyal,308
+Tuesday,11:55-1:35,4,Computer Engineering,Data Structure and Algorithm,Bibha Sthapit,308
+Wednesday,10:15-11:55,4,Computer Engineering,Operating System,Santosh Giri,308
+Wednesday,11:55-1:35,4,Computer Engineering,Numerical Methods,Santosh Ghimire,308
+Thursday,10:15-11:55,4,Computer Engineering,Operating System,Santosh Giri,308
+Thursday,12:45-2:25,4,Computer Engineering,Data Communication,Nanda Bikram Adhikari,308
+Friday,10:15-11:55,4,Computer Engineering,Data Structure and Algorithm,Bibha Sthapit,308
+Friday,11:55-1:35,4,Computer Engineering,Electromagnetics,Nischal Acharya,308
+Friday,2:25-4:05,4,Computer Engineering,Instrumentation,Sanjivan Satyal,308
